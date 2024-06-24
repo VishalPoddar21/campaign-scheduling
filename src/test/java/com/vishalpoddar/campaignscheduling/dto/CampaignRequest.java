@@ -1,16 +1,14 @@
 package com.vishalpoddar.campaignscheduling.dto;
 
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
 public class CampaignRequest {
     public String campaignName;
     public String emailTemplateId;
     public String recipientListId;
-    public Long scheduledTime;
-
-    public void setScheduledTime(Long scheduledTime) {
-        if (scheduledTime < 0) {
-            throw new IllegalArgumentException("Scheduled time must be non-negative");
-        }
-        this.scheduledTime = scheduledTime;
-    }
+    public int scheduledTime;
 }
 

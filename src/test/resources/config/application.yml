@@ -1,0 +1,9 @@
+host:
+  campaign:
+    base: "http://localhost:7070"
+  email:
+    base: "http://localhost:7071"
+  recipients:
+    base: "http://localhost:7072"
+
+

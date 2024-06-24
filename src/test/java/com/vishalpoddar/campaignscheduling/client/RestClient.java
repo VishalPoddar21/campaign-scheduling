@@ -13,7 +13,6 @@ import static io.restassured.RestAssured.given;
 
 @Slf4j
 @Component
-@RequiredArgsConstructor
 public class RestClient {
 
     public RequestSpecification getRequestSpecification() {
