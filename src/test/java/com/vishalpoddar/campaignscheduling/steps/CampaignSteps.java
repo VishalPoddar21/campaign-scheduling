@@ -2,6 +2,7 @@ package com.vishalpoddar.campaignscheduling.steps;
 
 import com.vishalpoddar.campaignscheduling.dto.CampaignNameRequest;
 import com.vishalpoddar.campaignscheduling.dto.CampaignRequest;
+import com.vishalpoddar.campaignscheduling.dto.ResponseWrapperCampaignResponse;
 import com.vishalpoddar.campaignscheduling.pom.Campaign;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
@@ -41,18 +42,21 @@ public class CampaignSteps extends BaseSteps {
         context.setResponse(response);
     }
 
-    @When("I update email campaign name with id {string} to {string}")
-    public void createEmailCampaignForTime(String id, String name) {
+    @When("I update campaign name")
+    public void createEmailCampaignForTime() {
+        var lasRes = context.getResponse().as(ResponseWrapperCampaignResponse.class);
         var response = restClient.getRequestSpecification()
-                .body(new CampaignNameRequest(name))
-                .patch(baseUrl+"/campaigns/" + id + "/name");
+                .body(new CampaignNameRequest(util.getUniqueName("Upt")))
+                .patch(baseUrl+"/campaigns/" + lasRes.getData().getId() + "/name");
         context.setResponse(response);
     }
 
-    @Given("I get campaign with id {string}")
-    public void getCampaign(String id){
+    @Given("I get last campaign and verify name")
+    public void getCampaign(){
+        var lastRes = context.getResponse().as(ResponseWrapperCampaignResponse.class);
         var response = restClient.getRequestSpecification()
-                .get(baseUrl+"/campaigns/" + id);
+                .get(baseUrl+"/campaigns/" + lastRes.getData().getId());
+        Assert.assertEquals(lastRes.getData().getCampaignName() , response.as(ResponseWrapperCampaignResponse.class).getData().getCampaignName());
         context.setResponse(response);
     }
 }
