@@ -1,7 +1,6 @@
 package com.vishalpoddar.campaignscheduling.steps;
 
 import com.vishalpoddar.campaignscheduling.dto.CampaignNameRequest;
-import com.vishalpoddar.campaignscheduling.dto.CampaignRequest;
 import com.vishalpoddar.campaignscheduling.dto.ResponseWrapperCampaignResponse;
 import com.vishalpoddar.campaignscheduling.pom.Campaign;
 import io.cucumber.java.en.Given;
@@ -10,25 +9,19 @@ import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
-import java.time.LocalTime;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 public class CampaignSteps extends BaseSteps {
     /*
     * I want to create a new email campaign with a scheduled send time
         and date, so that the campaign is sent automatically at the specified time.
         * */
 
+    @Autowired
+    Campaign campaign;
     @Value("${host.campaign.base}")
     private String baseUrl;
 
-    @Autowired
-    Campaign campaign;
-
     @Given("I check Campaign Service health")
-    public void getHealth(){
+    public void getHealth() {
         restClient.getRequestSpecification().get(baseUrl + "/health")
                 .then().statusCode(200);
     }
@@ -37,7 +30,7 @@ public class CampaignSteps extends BaseSteps {
     public void createEmailCampaign(int time, String emailTemp, String recList) {
         var response = restClient.getRequestSpecification()
                 .body(campaign.buildCampaignRequest(time, emailTemp, recList))
-                .post(baseUrl+"/campaigns");
+                .post(baseUrl + "/campaigns");
 
         context.setResponse(response);
     }
@@ -47,16 +40,16 @@ public class CampaignSteps extends BaseSteps {
         var lasRes = context.getResponse().as(ResponseWrapperCampaignResponse.class);
         var response = restClient.getRequestSpecification()
                 .body(new CampaignNameRequest(util.getUniqueName("Upt")))
-                .patch(baseUrl+"/campaigns/" + lasRes.getData().getId() + "/name");
+                .patch(baseUrl + "/campaigns/" + lasRes.getData().getId() + "/name");
         context.setResponse(response);
     }
 
     @Given("I get last campaign and verify name")
-    public void getCampaign(){
+    public void getCampaign() {
         var lastRes = context.getResponse().as(ResponseWrapperCampaignResponse.class);
         var response = restClient.getRequestSpecification()
-                .get(baseUrl+"/campaigns/" + lastRes.getData().getId());
-        Assert.assertEquals(lastRes.getData().getCampaignName() , response.as(ResponseWrapperCampaignResponse.class).getData().getCampaignName());
+                .get(baseUrl + "/campaigns/" + lastRes.getData().getId());
+        Assert.assertEquals(lastRes.getData().getCampaignName(), response.as(ResponseWrapperCampaignResponse.class).getData().getCampaignName());
         context.setResponse(response);
     }
 }

@@ -8,8 +8,8 @@ import org.junit.platform.suite.api.Suite;
 @Suite
 @SelectClasspathResource("features")
 @ConfigurationParameter(
-		key = Constants.GLUE_PROPERTY_NAME,
-		value = "com.vishalpoddar.campaignscheduling.steps")
+        key = Constants.GLUE_PROPERTY_NAME,
+        value = "com.vishalpoddar.campaignscheduling.steps")
 public class EntryPointITTest {
 }
 
