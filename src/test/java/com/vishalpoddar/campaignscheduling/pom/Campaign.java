@@ -12,7 +12,7 @@ public class Campaign extends Base{
         String eTemp = emailTemp.equals("any") ? context.getEmailTemplates().get(0) : emailTemp;
         String rList = recList.equals("any") ? context.getRecipientsList().get(0) : recList;
         return CampaignRequest.builder()
-                .campaignName(LocalTime.now().toString())
+                .campaignName(util.getUniqueName("Cmp"))
                 .scheduledTime(time)
                 .emailTemplateId(eTemp)
                 .recipientListId(rList)

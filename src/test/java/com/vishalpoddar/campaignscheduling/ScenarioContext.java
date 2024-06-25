@@ -1,4 +1,4 @@
-package com.vishalpoddar.campaignscheduling.steps;
+package com.vishalpoddar.campaignscheduling;
 
 import io.restassured.response.Response;
 import lombok.Data;
