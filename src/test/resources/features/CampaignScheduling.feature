@@ -6,7 +6,7 @@ Feature: Campaign Creation
     And I create a new email campaign with send time <sendTime>, email template "<emailTemp>" and recipients list "<recListId>"
     Then the response status should be <resCode>
 
-    # test cases for creating an email campaign.
+    # Test cases for creating an email campaign
     Examples:
       | sendTime    | recListId | emailTemp  | resCode |
       # Create a campaign with send time as 0, any recipient list, any email template; expect success (201).
@@ -26,6 +26,28 @@ Feature: Campaign Creation
       # Create a campaign with a negative send time (-1), any recipient list, any email template; expect failure (400).
       | -1          | any       | any        | 400     |
 
+  Scenario Outline: Campaign Creation for email template
+    When I fetch all recipients lists
+    And I create a new email campaign with send time <sendTime>, email template "<emailTemp>" and recipients list "<recListId>"
+    Then the response status should be <resCode>
+
+    # Test cases for creating an email campaign with specific email templates
+    Examples:
+      | sendTime | recListId | emailTemp | resCode |
+      # Create a campaign with send time as 1, any recipient list, email template "EM-001"; expect success (201).
+      | 1        | any       | EM-001    | 201     |
+
+  Scenario Outline: Campaign Creation for recipients list
+    When I fetch all recipients lists
+    And I create a new email campaign with send time <sendTime>, email template "<emailTemp>" and recipients list "<recListId>"
+    Then the response status should be <resCode>
+
+    # Test cases for creating an email campaign with specific recipient lists
+    Examples:
+      | sendTime | recListId | emailTemp | resCode |
+      # Create a campaign with send time as 2147483647, recipient list "RL-001", any email template; expect success (201).
+      | 2147483647 | RL-001   | any      | 201     |
+
   Scenario: Update Campaign
     Given I fetch all email templates
     And I fetch all recipients lists
@@ -35,3 +57,24 @@ Feature: Campaign Creation
     And I get last campaign and verify name
     Then the response status should be 200
 
+  Scenario Outline: Get recipients list with id
+    Given I fetch recipients list for "<id>"
+    Then the response status should be <resCode>
+
+    Examples:
+      | id         | resCode |
+      # Fetch recipient list with id "RL-001"; expect success (200).
+      | RL-001     | 200     |
+      # Fetch recipient list with invalid id; expect failure (400).
+      | negative   | 404     |
+
+  Scenario Outline: Get email template with id
+    Given I fetch email template with "<id>"
+    Then the response status should be <resCode>
+
+    Examples:
+      | id         | resCode |
+      # Fetch email template with id "EM-001"; expect success (200).
+      | EM-001     | 200     |
+      # Fetch email template with invalid id; expect failure (400).
+      | negative   | 404     |

@@ -3,6 +3,8 @@ package com.vishalpoddar.campaignscheduling.steps;
 import com.vishalpoddar.campaignscheduling.dto.CampaignNameRequest;
 import com.vishalpoddar.campaignscheduling.dto.ResponseWrapperCampaignResponse;
 import com.vishalpoddar.campaignscheduling.pom.Campaign;
+import io.cucumber.java.Before;
+import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
@@ -19,6 +21,12 @@ public class CampaignSteps extends BaseSteps {
     Campaign campaign;
     @Value("${host.campaign.base}")
     private String baseUrl;
+
+//    @Before
+    public void getHealthHead() {
+        restClient.getRequestSpecification().head(baseUrl + "/health")
+                .then().statusCode(200);
+    }
 
     @Given("I check Campaign Service health")
     public void getHealth() {

@@ -1,7 +1,10 @@
 package com.vishalpoddar.campaignscheduling.steps;
 
+import com.vishalpoddar.campaignscheduling.dto.ResponseWrapperEmailTemplateResponse;
 import com.vishalpoddar.campaignscheduling.dto.ResponseWrapperListEmailTemplateResponse;
 import com.vishalpoddar.campaignscheduling.dto.ResponseWrapperRecipientListResponse;
+import io.cucumber.java.Before;
+import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +16,12 @@ public class EmailSteps extends BaseSteps {
 
     @Value("${host.email.base}")
     private String baseUrl;
+
+    @Before
+    public void getHealthHead() {
+        restClient.getRequestSpecification().head(baseUrl + "/health")
+                .then().statusCode(200);
+    }
 
     @Given("I check Email Service health")
     public void getHealth() {
@@ -33,9 +42,10 @@ public class EmailSteps extends BaseSteps {
 
     @When("I fetch email template with {string}")
     public void getEmailTemplate(String id) {
-        ResponseWrapperRecipientListResponse res = restClient.getRequestSpecification()
-                .get(baseUrl + "/email/templates/" + id).then().statusCode(200)
-                .extract().as(ResponseWrapperRecipientListResponse.class);
+        var res = restClient.getRequestSpecification()
+                .get(baseUrl + "/email/templates/" + id);
+        context.setResponse(res);
+        res.then().extract().as(ResponseWrapperEmailTemplateResponse.class);
     }
 
 
