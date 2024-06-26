@@ -6,6 +6,7 @@ This document highlights setup, test run, conventions followed, and structure of
 Before initiating the setup, please ensure the following requirements are met:
 - Java: JDK version 17 or higher
 - Maven: Version 3.6.0 or higher
+- Campaign Scheduling Project setup - https://gist.github.com/shivam-inflection-io/edda29879786e996d997e8963c7c2435
 
 ## Installation
 To install and run the project along with all tests, proceed with the following steps:
