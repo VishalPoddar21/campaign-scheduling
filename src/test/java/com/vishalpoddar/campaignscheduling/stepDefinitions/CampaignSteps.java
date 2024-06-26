@@ -22,7 +22,7 @@ public class CampaignSteps extends BaseSteps {
     @Value("${host.campaign.base}")
     private String baseUrl;
 
-    //    @Before
+    @Before
     public void getHealthHead() {
         restClient.getRequestSpecification().head(baseUrl + "/health")
                 .then().statusCode(200);

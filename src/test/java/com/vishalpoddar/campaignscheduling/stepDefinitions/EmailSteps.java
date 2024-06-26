@@ -15,7 +15,7 @@ public class EmailSteps extends BaseSteps {
     @Value("${host.email.base}")
     private String baseUrl;
 
-    @Before
+    //@Before
     public void getHealthHead() {
         restClient.getRequestSpecification().head(baseUrl + "/health")
                 .then().statusCode(200);
