@@ -1,10 +1,8 @@
-package com.vishalpoddar.campaignscheduling.steps;
+package com.vishalpoddar.campaignscheduling.stepDefinitions;
 
 import com.vishalpoddar.campaignscheduling.dto.ResponseWrapperEmailTemplateResponse;
 import com.vishalpoddar.campaignscheduling.dto.ResponseWrapperListEmailTemplateResponse;
-import com.vishalpoddar.campaignscheduling.dto.ResponseWrapperRecipientListResponse;
 import io.cucumber.java.Before;
-import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Value;

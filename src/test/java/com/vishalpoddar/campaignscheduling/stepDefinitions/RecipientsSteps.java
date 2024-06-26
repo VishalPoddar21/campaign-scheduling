@@ -1,6 +1,5 @@
-package com.vishalpoddar.campaignscheduling.steps;
+package com.vishalpoddar.campaignscheduling.stepDefinitions;
 
-import com.vishalpoddar.campaignscheduling.dto.ResponseWrapperEmailTemplateResponse;
 import com.vishalpoddar.campaignscheduling.dto.ResponseWrapperListRecipientListResponse;
 import com.vishalpoddar.campaignscheduling.dto.ResponseWrapperRecipientListResponse;
 import io.cucumber.java.Before;
@@ -40,8 +39,8 @@ public class RecipientsSteps extends BaseSteps {
 
     @Given("I fetch recipients list for {string}")
     public void getRecipientsList(String id) {
-        var  res = restClient.getRequestSpecification()
-                .get(baseUrl + "/recipients/lists/"+ id);
+        var res = restClient.getRequestSpecification()
+                .get(baseUrl + "/recipients/lists/" + id);
         context.setResponse(res);
         res.then().extract().as(ResponseWrapperRecipientListResponse.class);
     }

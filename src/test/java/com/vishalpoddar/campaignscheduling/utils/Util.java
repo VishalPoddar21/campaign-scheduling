@@ -1,4 +1,4 @@
-package com.vishalpoddar.campaignscheduling;
+package com.vishalpoddar.campaignscheduling.utils;
 
 import org.springframework.stereotype.Component;
 

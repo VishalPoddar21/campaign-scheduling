@@ -1,8 +1,8 @@
-package com.vishalpoddar.campaignscheduling.steps;
+package com.vishalpoddar.campaignscheduling.stepDefinitions;
 
 import io.cucumber.java.en.Then;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 public class CommonSteps extends BaseSteps {
 
