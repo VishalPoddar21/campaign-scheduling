@@ -19,6 +19,10 @@ A local test environment is set up using a Docker Compose file.
 ## Testing Tools
 - Automated testing tools: RestAssured with Cucumber and Spring Boot.
 
+## Test Cases
+- Test Cases are maintained as cucumber feature files under ../resources/features location
+- Test cases are numbered and description is added in example section of feature file.
+
 ## Test Data
 - Sample recipient lists and email templates are used in the test environment.
 - Mock data for dates, times, and user inputs to simulate various scenarios and boundary conditions.
